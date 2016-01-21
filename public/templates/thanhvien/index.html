@@ -1,0 +1,122 @@
+<div ng-controller="thanhvienController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin thành viên</div>
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtten">Tên:</label>
+                            <div class="col-sm-9">
+                                <input id="txtten" type="text" class="form-control" ng-model="thanhvien.ten" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtdienthoai">Điện thoại:</label>
+                            <div class="col-sm-9">
+                                <input id="txtdienthoai" type="text" class="form-control" ng-model="thanhvien.dienthoai" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtdiachi">Địa chỉ:</label>
+                            <div class="col-sm-9">
+                                <input id="txtdiachi" type="text" class="form-control" ng-model="thanhvien.diachi" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtsothevip">Số thẻ VIP:</label>
+                            <div class="col-sm-9">
+                                <input id="txtsothevip" type="text" class="form-control" ng-model="thanhvien.matheVIP" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtdiemvip">Điểm VIP:</label>
+                            <div class="col-sm-9">
+                                <input id="txtdiemvip" type="number" class="form-control" ng-model="thanhvien.diemVIP" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtdiemthuong">Điểm thưởng:</label>
+                            <div class="col-sm-9">
+                                <input id="txtdiemthuong" type="number" class="form-control" ng-model="thanhvien.diemthuong" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtchietkhau">Chiết khấu:</label>
+                            <div class="col-sm-9">
+                                <input id="txtchietkhau" type="number" class="form-control" ng-model="thanhvien.chietkhau" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtLoaiThanhVien">Loại thành viên</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="txtLoaiThanhVien" id="txtLoaiThanhVien" ng-model="thanhvien.loaithanhvien">
+                                    <option ng-repeat="ltv in dsLoaiThanhVien" value="{{ltv}}">{{ltv}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="optKhuVuc">Khu vực</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" name="optKhuVuc" id="optKhuVuc" ng-model="thanhvien.khuvuc">
+                                    <option ng-repeat="kv in dsKhuVuc">{{kv}}</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuThanhVien()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaThanhVien()" />
+                            <input class="btn btn-success" type="button" value="Excel" ng-click="xuatExcel()" />
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách thành viên</div>
+                    <form class="form-inline" style="margin-bottom:5px">
+                        <div class="form-group">
+                            <label for="txtTenSearch">Tên</label>
+                            <input id="txtTenSearch" type="text" class="form-control" ng-model="search.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtDTSearch">Điện thoại</label>
+                            <input id="txtDTSearch" type="text" class="form-control" ng-model="search.dienthoai" />
+                        </div>
+                        <input class="btn btn-info" type="submit" ng-click="timkiem()" value="Tìm kiếm" />
+                    </form>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Họ tên</th>
+                                <th>Điện thoại</th>
+                                <th>Địa chỉ</th>
+                                <th>Mã thẻ VIP</th>
+                                <th>Điểm VIP</th>
+                                <th>Chiết khấu</th>
+                                <th>Điểm thưởng</th>
+                                <th>Loại thành viên</th>
+                                <th>Khu vực</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tv in dsThanhVien" ng-click="chonThanhVien(tv)" class='{{tv.selected}}'>
+                                <td>{{tv.ten}}</td>
+                                <td>{{tv.dienthoai}}</td>
+                                <td>{{tv.diachi}}</td>
+                                <td>{{tv.matheVIP}}</td>
+                                <td>{{tv.diemVIP}}</td>
+                                <td>{{tv.chietkhau}}</td>
+                                <td>{{tv.diemthuong}}</td>
+                                <td>{{tv.loaithanhvien}}</td>
+                                <td>{{tv.khuvuc}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

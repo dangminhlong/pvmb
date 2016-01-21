@@ -1,0 +1,420 @@
+<div ng-controller="congnoController" ng-init="initController()">
+    <script type="text/ng-template" id="capnhatCongNoTemplate.html">
+        <div ng-init="initController()">
+            <div class="modal-header">
+                <h3 class="modal-title">{{title}}</h3>
+            </div>
+            <div class="modal-body container-fluid">
+                <form class="form-horizontal">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="dpNgayDatVe">Ngày đặt</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input id="dpNgayDatVe" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="congno.ngaydatve" is-open="popup_ngaydatve.opened"
+                                        close-text="Đóng" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="chon_ngaydatve()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                        </span>
+                                        <uib-timepicker ng-model="congno.giodatve" show-spinners="false" show-meridian="false"></uib-timepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="dpNgayXuatVe">Ngày xuất</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input id="dpNgayXuatVe" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="congno.ngayxuatve"
+                                        is-open="popup_ngayxuatve.opened" close-text="Đóng" ng-change="xuatve()" />
+                                        <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="chon_ngayxuatve()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-4" for="dpNgayThanhToan">Ngày T.Toán</label>
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <input id="dpNgayThanhToan" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="congno.ngaythanhtoan"
+                                               is-open="popup_ngaythanhtoan.opened" close-text="Đóng" ng-change="chonthanhtoan()" />
+                                        <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="chon_ngaythanhtoan()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="txtCTV">Thành viên</label>
+                                <div class="col-sm-9">
+                                    <input autocomplete="off" id="txtCTV" type="text" class="form-control" ng-model="congno.ctv" uib-typeahead="item as item.ten for item in dsCTV |filter:$viewValue"
+                                    typeahead-template-url='thanhvienTemplate.html' typeahead-on-select="chonCTV()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="txtKhach">Khách hàng</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="txtKhach" class="form-control" ng-model="congno.khachhang" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="txtHanhTrinh">Hành trình</label>
+                                <div class="col-sm-9">
+                                    <input autocomplete="off" type="text" id="txtHanhTrinh" class="form-control" ng-model="congno.hanhtrinh" uib-typeahead="item as item.ten for item in dsHanhTrinh | filter:$viewValue"
+                                        typeahead-on-select="chonHanhTrinh()" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="txtMaVe">Mã vé</label>
+                                <div class="col-sm-9">
+                                    <input type="text" id="txtMaVe" class="form-control" ng-model="congno.mave" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="optHang">Hãng</label>
+                                <div class="col-sm-9">
+                                    <select id="optHang" class="form-control" ng-model="congno.hang"
+                                        ng-options="item as item.ten for item in dsHangMayBay track by item._id"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="dpNgayBay">Ngày đi</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input id="dpNgayBay" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="congno.ngaybay" is-open="popup_ngaybay.opened"
+                                        close-text="Đóng" />
+                                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="chon_ngaybay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                                        <uib-timepicker id="tpGioBay" ng-model="congno.giobay" show-spinners="false" show-meridian="false"></uib-timepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-3" for="dpNgayBayVe">Ngày về</label>
+                                <div class="col-sm-9">
+                                    <div class="input-group">
+                                        <input id="dpNgayBayVe" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="congno.ngaybayve" is-open="popup_ngaybayve.opened"
+                                        close-text="Đóng" />
+                                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="chon_ngaybayve()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                                        <uib-timepicker id="tpGioBayVe" ng-model="congno.giobayve" show-spinners="false" show-meridian="false"></uib-timepicker>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <form>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtGiaVe">Giá vé</label>
+                                <input type="number" id="txtGiaVe" class="form-control" ng-model="congno.giave" ng-change="thayDoiGia()" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtGiaBan">Giá bán</label>
+                                <input type="number" id="txtGiaBan" class="form-control" ng-model="congno.giaban" ng-change="thayDoiGia()" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtCKDL">Chiết khấu ĐL</label>
+                                <input type="number" id="txtCKDL" class="form-control" ng-model="congno.ckdl" ng-change="thayDoiGia()" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtCKCTV">Chiết khấu CTV</label>
+                                <input type="number" id="txtCKCTV" class="form-control" ng-model="congno.ckctv" ng-change="thayDoiGia()" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtPhaiThu">Phải thu</label>
+                                <input type="number" id="txtPhaiThu" class="form-control" ng-model="congno.phaithu"" />
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="txtLoiNhuan">Lợi nhuận</label>
+                                <input type="number" id="txtLoiNhuan" class="form-control" ng-model="congno.loinhuan" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtTTX">Tình trạng vé</label>
+                                <select id="txtTTX" class="form-control" ng-model="congno.tinhtrangve" ng-change="chontinhtrang()">
+                                    <option>ĐÃ XUẤT</option>
+                                    <option>ĐẶT CHỖ</option>
+                                    <option>ĐẶT LẠI</option>
+                                    <option>HOÀN VÉ</option>
+                                    <option>HỦY</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtTTNo">Tình trạng nợ</label>
+                                <select id="txtTTNo" class="form-control" ng-model="congno.tinhtrangno" ng-change="thanhtoan()" >
+                                    <option>NỢ</option>
+                                    <option>ĐÃ THANH TOÁN</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="txtTTHV">Đã hoàn vé</label>
+                                <select id="txtTTHV" class="form-control" ng-model="congno.hoanve" ng-change="hoanve()" >
+                                    <option>CHƯA</option>
+                                    <option>RỒI</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtGhiChu">Ghi chú</label>
+                        <input type="text" id="txtGhiChu" class="form-control" ng-model="congno.ghichu" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <span style="color:#00ff00">{{updateStatus}}</span>
+                <button class="btn btn-primary" type="button" ng-click="luuCongNo()">Lưu công nợ</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Đóng</button>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="thanhvienTemplate.html">
+        <div class="row" style="padding:5px; width:600px; cursor:pointer">
+            <div class="col-md-5" style="color:#000fff">{{match.model.ten}}</div>
+            <div class="col-md-2" style="color:#ff0000;font-weight:bold">{{match.model.dienthoai}}</div>
+            <div class="col-md-5" style="float:right">{{match.model.diachi}}</div>
+        </div>
+    </script>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="section">
+                <div class="section_header">
+                    Quản lý công nợ
+                </div>
+                <div style="margin-top:10px;">
+                    <form class="form-inline">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="timtheo" style="width:60px">Tìm theo</label>
+                                    <select id="timtheo" ng-model="timtheo" class="form-control" style="width:130px">
+                                        <option value="1">Ngày đặt vé</option>
+                                        <option value="2">Ngày xuất vé</option>
+                                        <option value="3">Ngày thanh toán</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="dptungay" style="width:40px">Từ</label>
+                                <div class="input-group">
+                                    <input style="width:110px" id="dptungay" type="text" class="form-control
+                               " uib-datepicker-popup="dd/MM/yyyy" ng-model="tungay" is-open="popup_tungay.opened"
+                                    close-text="Đóng" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="chon_tungay()
+                               "><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-2">
+                            <div class="form-group">
+                                <label for="dpdenngay" style="width:40px">Đến</label>
+                                <div class="input-group">
+                                    <input style="width:110px" id="dpdenngay" type="text" class="form-control
+                               " uib-datepicker-popup="dd/MM/yyyy" ng-model="denngay" is-open="popup_denngay.opened"
+                                    close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="chon_denngay()
+                               "><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sltinhtrangve" style="width:40px">TT vé</label>
+                                    <select class="form-control" id="sltinhtrangve" ng-model="tinhtrangve" style="width:140px">
+                                        <option value="">Tất cả</option>
+                                        <option>ĐÃ XUẤT</option>
+                                        <option>ĐẶT CHỖ</option>
+                                        <option>ĐẶT LẠI</option>
+                                        <option>HOÀN VÉ</option>
+                                        <option>HỦY</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="sltinhtrangno">TT NỢ</label>
+                                    <select class="form-control" id="sltinhtrangno" ng-model="tinhtrangno" style="width:140px">
+                                        <option value="">Tất cả</option>
+                                        <option>NỢ</option>
+                                        <option>ĐÃ THANH TOÁN</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="slhoanve">Hoàn vé</label>
+                                    <select class="form-control" id="slhoanve" ng-model="hoanve" style="width:90px">
+                                        <option value="">Tất cả</option>
+                                        <option>CHƯA</option>
+                                        <option>RỒI</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="margin-top:10px">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtcode" style="width:60px">Mã vé</label>
+                                    <input style="width:130px" type="text" id="txtcode" class="form-control
+                               " ng-model="mave" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txtCTV" style="width:40px">CTV</label>
+                                    <input style="width:150px" id="txtCTV" type="text" class="form-control
+                               " ng-model="ctv" uib-typeahead="item as item.ten for item in dsCTV |filter:$viewValue"
+                                        typeahead-template-url='thanhvienTemplate.html' />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="txttenkh" style="width:40px">KH</label>
+                                    <input style="width:150px" type="text" id="txttenkh" class="form-control
+                               " ng-model="khachhang" />
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="txtghichu" style="width:40px">G.Chú</label>
+                                    <input type="text" id="txtghichu" class="form-control" ng-model="ghichu" />
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="form-group" style="margin-top:10px">
+                        <input class="btn btn-default" type="button" value="Xem" ng-click="xemCongNo()">
+                        <input class="btn btn-default" type="button" value="Nhập Excel" ng-click="importExcel()">
+                        <input class="btn btn-default" type="button" value="Xuất Excel" ng-click="xuatExcel()">
+                        <input class="btn btn-default" type="button" value="Thêm mới" ng-click="themMoi()">
+                        <input class="btn btn-default" type="button" value="Sửa" ng-click="suaCongNo()">
+                        <input class="btn btn-default" type="button" value="Hủy" ng-click="huyCongNo()">
+                    </div>
+                    <div class="row">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Ngày đặt</th>
+                                    <th>CTV</th>
+                                    <th>Khách</th>
+                                    <th>Hành trình</th>
+                                    <th>Mã vé</th>
+                                    <th>Ngày đi</th>
+                                    <th>Ngày về</th>
+                                    <th>Giá vé</th>
+                                    <th>Giá bán</th>
+                                    <th>CK ĐL</th>
+                                    <th>CK CTV</th>
+                                    <th>Phải thu</th>
+                                    <th>Lợi nhuận</th>
+                                    <th>Tình trạng vé</th>
+                                    <th>Tình trạng nợ</th>
+                                    <th>Hoàn vé</th>
+                                    <th>Ghi chú</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="cn in dsCongNo" ng-dblclick="suaCongNo()" ng-click="chonCongNo(cn)" class='{{cn.selected}} {{cn.canhbao}}'>
+                                    <td>{{cn.ngaydatve_dc|date:"dd/MM/yyyy HH:mm"}}</td>
+                                    <td>{{cn.ctv.ten}}</td>
+                                    <td>{{cn.khachhang}}</td>
+                                    <td>{{cn.hanhtrinh.ten}}</td>
+                                    <td>{{cn.mave}}</td>
+                                    <td>{{cn.ngaybay|date:"dd/MM/yy HH:mm"}}</td>
+                                    <td>{{cn.ngaybayve|date:"dd/MM/yy HH:mm"}}</td>
+                                    <td>{{cn.giave|number}}</td>
+                                    <td>{{cn.giaban|number}}</td>
+                                    <td>{{cn.ckdl|number}}</td>
+                                    <td>{{cn.ckctv|number}}</td>
+                                    <td>{{cn.phaithu|number}}</td>
+                                    <td>{{cn.loinhuan|number}}</td>
+                                    <td>{{cn.tinhtrangve}}</td>
+                                    <td>{{cn.tinhtrangno}}</td>
+                                    <td>{{cn.hoanve}}</td>
+                                    <td>{{cn.ghichu}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Tổng</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>{{tong.tongsove|number}}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th>{{tong.tonggiave|number}}</th>
+                                    <th>{{tong.tonggiaban|number}}</th>
+                                    <th>{{tong.tongckdl|number}}</th>
+                                    <th>{{tong.tongckctv|number}}</th>
+                                    <th>{{tong.tongphaithu|number}}</th>
+                                    <th>{{tong.tongloinhuan|number}}</th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

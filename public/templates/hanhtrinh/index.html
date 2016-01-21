@@ -1,0 +1,46 @@
+<div ng-controller="hanhtrinhController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin hành trình</div>
+                    <div>
+                        <div class="form-group">
+                            <label>Tên:</label>
+                            <input type="text" class="form-control" ng-model="hanhtrinh.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label>Hệ số:</label>
+                            <input type="number" class="form-control" ng-model="hanhtrinh.heso" />
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuHanhTrinh()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaHanhTrinh()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách hành trình</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Hệ số</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="ht in dsHanhTrinh" ng-click="chonHanhTrinh(ht)" class='{{ht.selected}}'>
+                                <td>{{ht.ten}}</td>
+                                <td>{{ht.heso}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

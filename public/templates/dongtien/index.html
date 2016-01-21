@@ -1,0 +1,127 @@
+<div ng-controller="dongtienController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="sub_section">
+                    <div class="sub_section_header">Nhập dòng tiền</div>
+                    <form class="form-horizontal">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-2" for="txtNgay">Ngày</label>
+                                    <div class="col-md-10">
+                                        <div class="input-group">
+                                            <input id="txtNgay" type="text" class="form-control" uib-datepicker-popup="dd/MM/yyyy" ng-model="dongtien.ngay" is-open="popup_ngay.opened"
+                                                   close-text="Đóng" ng-change="chonNgay()" />
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-default" ng-click="chon_ngay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-5" for="txtduno">Dư nợ đầu ngày:</label>
+                                    <div class="col-md-7">
+                                        <input id="txtduno" type="number" class="form-control" ng-model="dongtien.dunodau" ng-change="nhap_tien()" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <legend>Các khoản thu: (Tổng {{dongtien.tongthu|number}})<span title="Thêm" style="float:right;cursor:pointer;color:#0040d0" ng-click="them_thu()">[+]</span></legend>
+                        <div class="row" style="margin-bottom:5px" ng-repeat="thu in dongtien.thuchitiet">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Nội dung</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" ng-model="thu.noidung">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Số tiền</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="number" ng-model="thu.sotien" ng-change="nhap_tien()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <legend>Các khoản chi: (Tổng {{dongtien.tongchi|number}})<span title="Thêm" style="float:right;cursor:pointer;color:#0040d0" ng-click="them_chi()">[+]</span></legend>
+                        <div class="row" style="margin-bottom:5px" ng-repeat="chi in dongtien.chichitiet">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Nội dung</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="text" ng-model="chi.noidung">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-3">Số tiền</label>
+                                    <div class="col-md-9">
+                                        <input class="form-control" type="number" ng-model="chi.sotien" ng-change="nhap_tien()">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-3" for="txtDuNoCuoiKy">Dư nợ cuối ngày:</label>
+                                    <div class="col-md-9">
+                                        <input readonly id="txtDuNoCuoiKy" type="number" class="form-control" ng-model="dongtien.dunocuoi" />
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label class="col-md-2" for="txtGhiChu">Ghi chú:</label>
+                                    <div class="col-md-10">
+                                        <input id="txtGhiChu" type="text" class="form-control" ng-model="dongtien.ghichu" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                        <input class="btn btn-primary" type="button" value="Lưu dòng tiền" ng-click="luuDongTien()" />
+                        <input class="btn btn-danger" type="button" value="Xóa dòng tiền" ng-click="xoaDongTien()" />
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="sub_section">
+                    <div class="sub_section_header">Lịch sử thao tác</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Ngày</th>
+                                <th>Dư nợ đầu</th>
+                                <th>Tổng thu</th>
+                                <th>Tổng chi</th>
+                                <th>Dư nợ cuối</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="dt in dsDongTien" ng-click="chonDongTien(dt)" class="{{dt.selected}}">
+                                <td>{{dt.ngay | date : 'dd/MM/yyyy HH:mm'}}</td>
+                                <td>{{dt.dunodau|number}}</td>
+                                <td>{{dt.tongthu|number}}</td>
+                                <td>{{dt.tongchi|number}}</td>
+                                <td>{{dt.dunocuoi|number}}</td>
+                                <td>{{dt.ghichu}}</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,40 @@
+<div ng-controller="khuvucController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin khu vực</div>
+                    <div>
+                        <div class="form-group">
+                            <label for="txtten">Tên:</label>
+                            <input id="txtten" type="text" class="form-control" ng-model="khuvuc.ten" />
+                        </div>                        
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuKhuVuc()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaKhuVuc()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách khu vực</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tv in dsKhuVuc" ng-click="chonKhuVuc(tv)" class='{{tv.selected}}'>
+                                <td>{{tv.ten}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<div ng-controller="nguoidungController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin người dùng</div>
+                    <div>
+                        <div class="form-group">
+                            <label>Tên hiển thị:</label>
+                            <input type="text" class="form-control" ng-model="nguoidung.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtnd">Tên người dùng:</label>
+                            <input id="txtnd" type="text" class="form-control" ng-model="nguoidung.tennguoidung" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtmk">Mật khẩu:</label>
+                            <input id="txtmk" type="password" class="form-control" ng-model="nguoidung.matkhau" />
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuNguoiDung()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaNguoiDung()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách người dùng</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên người dùng</th>
+                                <th>Tên hiển thị</th>                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tv in dsNguoiDung" ng-click="chonNguoiDung(tv)" class='{{tv.selected}}'>
+                                <td>{{tv.tennguoidung}}</td>
+                                <td>{{tv.ten}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

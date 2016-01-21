@@ -1,0 +1,30 @@
+<style type="text/css">
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-color: #fff;
+        /*dim the background*/
+    }
+</style>
+<div class="overlay">
+    <div ng-controller="loginController" ng-init="initController()">
+        <div class="container" style="width:400px">
+            <form>
+                <h3>ĐĂNG NHẬP HỆ THỐNG</h3>
+                <div class="form-group">
+                    <label for="txtTenNguoiDung">Tên người dùng</label>
+                    <input type="text" id="txtTenNguoiDung" ng-model="tennguoidung" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="txtMatkhau">Mật khẩu</label>
+                    <input type="password" id="txtMatkhau" ng-model="matkhau" class="form-control">
+                </div>
+                <input type="button" class="btn btn-primary" value="Đăng nhập" ng-click="dangnhap()">
+            </form>
+        </div>
+    </div>
+</div>

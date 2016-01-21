@@ -1,0 +1,85 @@
+<div ng-controller="nhantinController" ng-init="initController()">
+    <script type="text/ng-template" id="thanhvienTemplate.html">
+        <div class="row" style="padding:5px; width:600px; cursor:pointer">
+            <div class="col-md-5" style="color:#000fff">{{match.model.ten}}</div>
+            <div class="col-md-2" style="color:#ff0000;font-weight:bold">{{match.model.dienthoai}}</div>
+            <div class="col-md-5" style="float:right">{{match.model.diachi}}</div>
+        </div>
+    </script>
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin SMS</div>
+                    <form class="form-horizontal">
+                        <div class="form-group" >
+                            <label class=" col-sm-3" for="txtten">Địa chỉ máy gửi SMS:</label>
+                            <div class="col-sm-9">
+                                <input id="txtten" type="text" class="form-control" ng-model="url" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtdienthoai">Số máy nhận:</label>
+                            <div class="col-sm-9">
+                                <input autocomplete="off" id="txtdienthoai" type="text" class="form-control" ng-model="sms.dienthoai" uib-typeahead="item as item.dienthoai for item in dsCTV |filter:$viewValue"
+                                       typeahead-template-url='thanhvienTemplate.html' />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" col-sm-3" for="txtnoidung">Nội dung<br> <span>Số ký tự: {{sms.noidung.length}}</span></label>
+                            <div class="col-sm-9">
+                                <textarea id="txtnoidung" name="Message" rows="6" class="form-control" ng-model="sms.noidung" />
+                            </div>
+                        </div>
+                        <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                        <input class="btn btn-primary" type="button" value="Gửi tin nhắn" ng-click="nhantin()" />                     
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách tin nhắn</div>
+                    <form class="form-inline" style="margin-bottom:5px">
+                        <div class="form-group">
+                            <label for="txtTen">Tên</label>
+                            <input id="txtTen" type="text" class="form-control" ng-model="search.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtSoDienThoai">Điện thoại</label>
+                            <input id="txtSoDienThoai" type="text" class="form-control" ng-model="search.dienthoai" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtNoiDung">Nội dung</label>
+                            <input id="txtNoiDung" type="text" class="form-control" ng-model="search.noidung" />
+                        </div>
+                    </form>
+                    <form style="margin-bottom:5px">
+                        <input class="btn btn-info" type="button" ng-click="timkiem()" value="Tìm kiếm" />
+                        <input class="btn btn-info" type="button" ng-click="xoasms()" value="Xoá tin nhắn" />
+                    </form>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Điện thoại</th>
+                                <th>Tên</th>
+                                <th>Nội dung</th>
+                                <th>Ngày gửi</th>
+                                <th>Người gửi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="sms in dsSMS" ng-click="chonSMS(sms)" class='{{sms.selected}}'>
+                                <td>{{sms.dienthoai}}</td>
+                                <td>{{sms.kh}}</td>
+                                <td>{{sms.noidung}}</td>
+                                <td>{{sms.ngay|date:'dd/MM/yyyy HH:mm'}}</td>
+                                <td>{{sms.user}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div ng-controller="hangmaybayController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin hãng máy bay</div>
+                    <div>
+                        <div class="form-group">
+                            <label for="txtten">Tên hãng:</label>
+                            <input id="txtten" type="text" class="form-control" ng-model="hangmaybay.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtvt">Viết tắt:</label>
+                            <input id="txtvt" type="text" class="form-control" ng-model="hangmaybay.viettat" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtBatDauGioDatCho">Bắt đầu cảnh báo đặt chỗ (giờ):</label>
+                            <input id="txtBatDauGioDatCho" type="number" class="form-control" ng-model="hangmaybay.batdaucanhbaodatcho" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtKetThucGioDatCho">Kết thúc cảnh báo đặt chỗ (giờ):</label>
+                            <input id="txtKetThucGioDatCho" type="number" class="form-control" ng-model="hangmaybay.ketthuccanhbaodatcho" />
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuHangMayBay()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaHangMayBay()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách hãng máy bay</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Viết tắt</th>
+                                <th>Bắt đầu cảnh báo đặt chỗ</th>
+                                <th>Kết thúc cảnh báo đặt chỗ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="hang in dsHangMayBay" ng-click="chonHangMayBay(hang)" class='{{hang.selected}}'>
+                                <td>{{hang.ten}}</td>
+                                <td>{{hang.viettat}}</td>
+                                <td>{{hang.batdaucanhbaodatcho}}</td>
+                                <td>{{hang.ketthuccanhbaodatcho}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

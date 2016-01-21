@@ -1,0 +1,84 @@
+<div ng-controller="quanlynoController" ng-init="initController()">
+    <script type="text/ng-template" id="thanhvienTemplate.html">
+        <div class="row" style="margin-left: 5px; width:500px; cursor:pointer">
+            <div class="col-md-5">{{match.model.ten}}</div>
+            <div class="col-md-2">{{match.model.dienthoai}}</div>
+            <div class="col-md-5">{{match.model.diachi}}</div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="chitietnoTemplate.html">
+        <div ng-init="initController()">
+            <div class="modal-header">
+                <h3 class="modal-title">Chi tiết nợ</h3>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr><td>Ngày</td><td>Số tiền</td><td>Ghi chú</td><td>Hình thức</td></tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="ct in dsChiTietNo">
+                            <td>{{ct.ngay_ct | date:'dd/MM/yyyy HH:mm'}}</td>
+                            <td>{{ct.sotien}}</td>
+                            <td>{{ct.ghichu}}</td>
+                            <td>{{ct.loai == 1 ? 'Thêm nợ' : 'Giảm nợ'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-info" type="button" ng-click="excel()">Excel</button>
+                <button class="btn btn-warning" type="button" ng-click="cancel()">Đóng</button>
+            </div>
+        </div>
+    </script>
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin quản lý nợ</div>
+                    <div>
+                        <div class="form-group">
+                            <label for="txtCTV">Người nợ</label>
+                            <input autocomplete="off" id="txtCTV" type="text" class="form-control" ng-model="no.ctv" uib-typeahead="item as item.ten for item in dsCTV |filter:$viewValue"
+                            typeahead-template-url='thanhvienTemplate.html' />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtSoTien">Số tiền</label>
+                            <input id="txtSoTien" type="number" class="form-control" ng-model="no.sotien" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtGhiChu">Ghi chú</label>
+                            <input id="txtGhiChu" type="text" class="form-control" ng-model="no.ghichu" />
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-primary" type="button" value="Thêm nợ" ng-click="themno()" />
+                            <input class="btn btn-danger" type="button" value="Giảm nợ" ng-click="giamno()" />
+                            <input class="btn btn-info" type="button" value="Chi tiết" ng-click="chitiet()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách nợ</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Khách</th>
+                                <th>Số tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="no in dsNo" ng-click="chonNo(no)" class='{{no.selected}}'>
+                                <td>{{no.ctv.ten}}</td>
+                                <td>{{no.sotien}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
