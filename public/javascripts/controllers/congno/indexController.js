@@ -202,7 +202,7 @@ define(["app-config"], function (app) {
             modalInstance.result.then(function (data) {
                 $scope.xemCongNo();
             }, function () {
-                console.log('Modal dismissed at: ' + new Date());
+                $scope.xemCongNo();
             });
         }
     }]);
