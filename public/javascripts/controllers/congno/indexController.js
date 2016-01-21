@@ -63,14 +63,19 @@ define(["app-config"], function (app) {
                 msg.data.dscongno.forEach(function(value, index, dsCongNo){
                     var soGio = Math.floor((new Date(value.ngaybay) - gioHT)/(1000*60*60));
                     var soGioDatVe = Math.floor((gioHT - new Date(value.ngaydatve))/(1000*60*60));
+                    var soGioBDCBDC = value.hang ? value.hang.batdaucanhbaodatcho : 23;
+                    var soGioKTCBDC = value.hang ? value.hang.ketthuccanhbaodatcho : 24;
+
                     if (value.tinhtrangve == 'ĐẶT CHỖ' || value.tinhtrangve == 'ĐẶT LẠI'){
-                        if (soGio <= 24 || soGioDatVe >= 24){
+                        if (soGio <= 24 || soGioDatVe >= soGioKTCBDC){
                             msg.data.dscongno[index].canhbao = 'death';
                         }
                         else {
+                            if (value.hang && value.hang.viettat=='VN')
+                                msg.data.dscongno[index].canhbao ='cn_vn';
                             if (soGio <= 48)
                                 msg.data.dscongno[index].canhbao = 'yellow';
-                            if (soGioDatVe >= 23)
+                            if (soGioDatVe >= soGioBDCBDC)
                                 msg.data.dscongno[index].canhbao = 'red';
                         }
                         var ngaydatve_dc = new Date(value.ngaydatve);
@@ -403,7 +408,6 @@ define(["app-config"], function (app) {
                 delete data.ctv["diemVIP"];
                 delete data.ctv["diemthuong"];
                 delete data.ctv["loaithanhvien"];
-                delete data.ctv["khuvuc"];
             }
             delete data["giobay"];
             delete data["canhbao"];

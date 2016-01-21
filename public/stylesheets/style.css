@@ -38,24 +38,34 @@
     background: #000;
     color: #fff;
 }
+.death:hover{
+    color: #000 !important;
+}
 .cn_row {
     background: #31708F;
     color: #fff;
+}
+.cn_row:hover {
+    color: #000 !important;
 }
 .cn_active{
     background: #31505F !important;
     color: #fff;
 }
-
 .cn_green{
     background: #337AB7;
     color:#fff;
 }
-
 .cn_green:hover{
     color:#000 !important;
 }
-
+.cn_vn{
+    background: #7B8842;
+    color: #fff;
+}
+.cn_vn:hover{
+    color: #000 !important;
+}
 .cloud{
 	width:104px;
 	height:66px;
