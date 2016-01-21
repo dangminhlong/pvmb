@@ -183,6 +183,11 @@ CongNo.prototype.addNew = function (doc, callback) {
             delete doc["ngayhoanve"];
             doc.ngayhoanve = ngayhoanve;
         }
+        if (doc.ctv && doc.ctv._id){
+            var ctv_id = ObjectID(doc.ctv._id);
+            delete doc.ctv["_id"];
+            doc.ctv._id = ctv_id;
+        }
         db.collection('congno').insertOne(doc).then(function (error, result) {
             db.ensureIndex('congno', { "ngaydatve": 1, "ctv._id": 1, "khachhang": 1, "tinhtrangve": 1, "mave": 1 }, { background: true, w: 1 },
                 function (err, indexName) {
@@ -229,6 +234,11 @@ CongNo.prototype.update = function (doc, callback) {
             var ngayhoanve = new Date(doc.ngayhoanve);
             delete doc["ngayhoanve"];
             doc.ngayhoanve = ngayhoanve;
+        }
+        if (doc.ctv && doc.ctv._id){
+            var ctv_id = ObjectID(doc.ctv._id);
+            delete doc.ctv["_id"];
+            doc.ctv._id = ctv_id;
         }
         deferred(replaceCongNo(db, id, doc), updateDiemVIP(db, id, doc))(function (results) {
             callback(null, results);

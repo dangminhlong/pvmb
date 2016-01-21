@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd3b1f32-bd1f-4f74-a99a-374b1887d383" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/congno/index.html" afterPath="$PROJECT_DIR$/public/templates/congno/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/bin/daemon/pvmbeva.out.log" afterPath="$PROJECT_DIR$/bin/daemon/pvmbeva.out.log" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/stylesheets/style.css" afterPath="$PROJECT_DIR$/public/stylesheets/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/congno.js" afterPath="$PROJECT_DIR$/controllers/congno.js" />
     </list>
     <ignored path="pvmb.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -13,6 +10,7 @@
     <file path="/style.css" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453394443504" ignored="false" />
     <file path="/indexController.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453394632389" ignored="false" />
     <file path="/index.html" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453394093426" ignored="false" />
+    <file path="/congno.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453401862178" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,10 +48,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexController.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="indexController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="85" column="74" selection-start="3831" selection-end="3831" vertical-scroll-proportion="0.84460694">
+            <state line="77" column="21" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="congno.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controllers/congno.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="189" column="9" selection-start="6455" selection-end="6455" vertical-scroll-proportion="0.37294334">
               <folding />
             </state>
           </provider>
@@ -80,6 +87,7 @@
         <option value="$PROJECT_DIR$/public/templates/congno/index.html" />
         <option value="$PROJECT_DIR$/public/stylesheets/style.css" />
         <option value="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" />
+        <option value="$PROJECT_DIR$/controllers/congno.js" />
       </list>
     </option>
   </component>
@@ -272,6 +280,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pvmb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pvmb" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controllers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -417,7 +439,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="85" column="74" selection-start="3831" selection-end="3831" vertical-scroll-proportion="0.84460694">
+        <state line="77" column="21" selection-start="3296" selection-end="3296" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controllers/congno.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="189" column="9" selection-start="6455" selection-end="6455" vertical-scroll-proportion="0.37294334">
           <folding />
         </state>
       </provider>
