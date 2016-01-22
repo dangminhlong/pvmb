@@ -117,6 +117,7 @@ define(["app-config"], function (app) {
                         if (t1 == t2) return 0;
                         return t1 < t2 ? -1 : 1;                        
                     })
+
                     .thenBy(function(v1,v2){                           
                         var w1 = v1.ctv ? v1.ctv.ten : '';
                         var w2 = v2.ctv ? v2.ctv.ten : '';
@@ -407,7 +408,6 @@ define(["app-config"], function (app) {
                 delete data.ctv["matheVIP"];
                 delete data.ctv["diemVIP"];
                 delete data.ctv["diemthuong"];
-                delete data.ctv["loaithanhvien"];
             }
             delete data["giobay"];
             delete data["canhbao"];
