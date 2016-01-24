@@ -179,3 +179,6 @@
 2016-01-22 01:47:38 - Finished pvmbeva.exe
 2016-01-22 01:47:43 - Starting C:\Program Files\nodejs\node.exe --harmony "C:\Users\dmlon\AppData\Roaming\npm\node_modules\node-windows\lib\wrapper.js" -f "E:\pvmb\bin\www" -l "PVMB EVA" -g 0.25 -w 1 -r 3 -a n
 2016-01-22 01:47:43 - Started 2932
+2016-01-23 17:04:35 - Stopping pvmbeva.exe
+2016-01-23 17:04:35 - ProcessKill 2932
+2016-01-23 17:04:35 - Finished pvmbeva.exe

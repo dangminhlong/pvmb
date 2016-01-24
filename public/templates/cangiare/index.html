@@ -1,0 +1,84 @@
+<div ng-controller="cangiareController" ng-init="initController()">
+    <script type="text/ng-template" id="thanhvienTemplate.html">
+        <div class="row" style="padding:5px; width:600px; cursor:pointer">
+            <div class="col-md-5" style="color:#000fff">{{match.model.ten}}</div>
+            <div class="col-md-2" style="color:#ff0000;font-weight:bold">{{match.model.dienthoai}}</div>
+            <div class="col-md-5" style="float:right">{{match.model.diachi}}</div>
+        </div>
+    </script>
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin căn giá rẻ</div>
+                    <div>
+                        <div class="form-group">
+                            <label for="ipThanhVien">Thành viên:</label>
+                            <input autocomplete="off" id="ipThanhVien" type="text" class="form-control" ng-model="cangiare.thanhvien"
+                                   uib-typeahead="item as item.ten for item in dsCTV | filter: $viewValue"
+                                   typeahead-template-url="thanhvienTemplate.html"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="ipHanhTrinh">Hành trình:</label>
+                            <input autocomplete="off" type="text" id="ipHanhTrinh" class="form-control" ng-model="cangiare.hanhtrinh"
+                                   uib-typeahead="item as item.ten for item in dsHanhTrinh | filter:$viewValue" />
+                        </div>
+                        <div class="form-group">
+                            <label for="ipTuNgay">Từ ngày:</label>
+                            <div class="input-group">
+                                <input id="ipTuNgay" type="text" class="form-control"
+                                       uib-datepicker-popup="dd/MM/yyyy" ng-model="cangiare.tungay"
+                                       is-open="pop_tungay.opened" close-text="Đóng" today-text="Hôm nay" clear-text="Xóa" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="chon_tungay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ipDenNgay">Đến ngày:</label>
+                            <div class="input-group">
+                                <input id="ipDenNgay" type="text" class="form-control"
+                                       uib-datepicker-popup="dd/MM/yyyy" ng-model="cangiare.denngay"
+                                       is-open="pop_denngay.opened" close-text="Đóng" today-text="Hôm nay" clear-text="Xóa" />
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="chon_denngay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuCanGiaRe()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaCanGiaRe()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Thành viên</th>
+                                <th>Điện thoại</th>
+                                <th>Hành trình</th>
+                                <th>Từ</th>
+                                <th>Đến</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tv in dsCanGiaRe" ng-click="chonCanGiaRe(tv)" class='{{tv.selected}}'>
+                                <td>{{tv.thanhvien.ten}}</td>
+                                <td>{{tv.thanhvien.dienthoai}}</td>
+                                <td>{{tv.hanhtrinh.ten}}</td>
+                                <td>{{tv.tungay|date:'dd/MM/yyyy'}}</td>
+                                <td>{{tv.denngay|date:'dd/MM/yyyy'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

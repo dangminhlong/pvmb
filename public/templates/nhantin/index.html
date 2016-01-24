@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             <tr ng-repeat="sms in dsSMS" ng-click="chonSMS(sms)" class='{{sms.selected}}'>
-                                <td>{{sms.dienthoai}}</td>
+                                <td>{{sms.dienthoai.dienthoai ? sms.dienthoai.dienthoai : sms.dienthoai}}</td>
                                 <td>{{sms.kh}}</td>
                                 <td>{{sms.noidung}}</td>
                                 <td>{{sms.ngay|date:'dd/MM/yyyy HH:mm'}}</td>

@@ -17,6 +17,7 @@ var sms = require('./routes/sms');
 var note = require('./routes/note');
 var dongtien = require('./routes/dongtien');
 var hangmaybay = require('./routes/hangmaybay');
+var cangiare = require('./routes/cangiare');
 
 var passport = require('passport')
 var LocalStrategy = require('passport-local').Strategy;
@@ -31,7 +32,7 @@ passport.use(new LocalStrategy(
             if (user.matkhau == password)
                 return done(null, user.ten);
             else
-                return done(null, false, { message: 'Sai mật khẩu.' });
+                return done(null, false, { message: 'Sai mật khẩu.' });
         });
     }
 ));
@@ -99,6 +100,7 @@ app.post('/sms*', auth, sms);
 app.post('/note*', auth, note);
 app.post('/dongtien*', auth, dongtien);
 app.post('/hangmaybay*', auth, hangmaybay);
+app.post('/cangiare*', auth, cangiare);
 // serve index.html for all remaining routes, in order to leave routing up to angular
 app.all("/*", function (req, res, next) {
     res.sendFile(path.join(__dirname, "public", "index.html"));

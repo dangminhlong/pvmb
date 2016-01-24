@@ -1,0 +1,69 @@
+<div ng-controller="todoController" ng-init="initController()">
+    <div class="container-fluid">
+        <div class="module_header"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="sub_section">
+                    <div class="sub_section_header">Thông tin công việc</div>
+                    <div>
+                        <div class="form-group">
+                            <label for="txtten">Tên:</label>
+                            <input id="txtten" type="text" class="form-control" ng-model="todo.ten" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txtnoidung">Nội dung:</label>
+                            <input id="txtnoidung" type="text" class="form-control" ng-model="todo.noidung" />
+                        </div>
+                        <div class="form-group">
+                            <label for="dptungay" style="width:40px">Từ</label>
+                            <div class="input-group">
+                                <input style="width:110px" id="dptungay" type="text" class="form-control
+                               " uib-datepicker-popup="dd/MM/yyyy" ng-model="todo.tungay" is-open="popup_tungay.opened"
+                                       close-text="Đóng" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="chon_tungay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="dpdenngay" style="width:40px">Đến</label>
+                            <div class="input-group">
+                                <input style="width:110px" id="dpdenngay" type="text" class="form-control
+                               " uib-datepicker-popup="dd/MM/yyyy" ng-model="todo.denngay" is-open="popup_denngay.opened"
+                                       close-text="Close" />
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="chon_denngay()"><i class="glyphicon glyphicon-calendar"></i></button>
+                                    </span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
+                            <input class="btn btn-primary" type="button" value="Lưu" ng-click="luuToDo()" />
+                            <input class="btn btn-danger" type="button" value="Xóa" ng-click="xoaToDo()" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="sub_section">
+                    <div class="sub_section_header">Danh sách công việc</div>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tên</th>
+                                <th>Nội dung</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="tv in dsToDo" ng-click="chonToDo(tv)" class='{{tv.selected}}'>
+                                <td>{{tv.ten}}</td>
+                                <td>{{tv.noidung}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,7 @@
 define(["app-config"], function (app) {
     app.register.controller("nhantinController", ["$scope", "$rootScope", "$location", "$http", function ($scope, $rootScope, $location, $http) {
         $scope.initController = function () {
-            $rootScope.title = 'QUẢN LÝ NHẮN TIN';
+            $rootScope.title = 'QUẢN LÝ NHẮN TIN';
             $scope.url = localStorage.getItem('smsURL');
             $scope.layDsSMS();
             $scope.layDsThanhVien();
@@ -13,7 +13,12 @@ define(["app-config"], function (app) {
         }
         $scope.layDsThanhVien = function () {
             $http.post('/thanhvien').then(function (resp) {
+                var dsCTV = resp.data;
+                dsCTV.forEach(function(value, idx, _dsCTV){
+                    value.sodienthoai = $.type(value)==='string' ? value.dienthoai : value.dienthoai.dienthoai;
+                });
                 $scope.dsCTV = resp.data;
+
             });
         };
         $scope.layDsSMS = function(){

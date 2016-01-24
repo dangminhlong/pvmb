@@ -34,7 +34,7 @@ define(["app-config"], function (app) {
                 $scope.dsHangMayBay = resp.data;
             });
         };
-        
+
         $scope.huyCongNo = function(){
             var data = $.extend({}, $scope.congno);
             $http.post('/congno/huy', data).then(function (resp) {
@@ -108,8 +108,14 @@ define(["app-config"], function (app) {
                     .thenBy(function(v1, v2){
                         var u1 = new Date(v1.ngaydatve);
                         var u2 = new Date(v2.ngaydatve);
-                        if (v1.tinhtrangve =='ĐÃ XUẤT' && v2.tinhtrangve == 'ĐÃ XUẤT'){
+                        if (v1.tinhtrangve =='ĐÃ XUẤT'){
                             u1.setHours(0,0,0,0);
+                            u2.setHours(0,0,0,0);
+                        }
+                        if (v1.hangmaybay && v1.hangmaybay.viettat == 'VN'){
+                            u1.setHours(0,0,0,0);
+                        }
+                        if (v2.hangmaybay && v2.hangmaybay.viettat == 'VN'){
                             u2.setHours(0,0,0,0);
                         }
                         var t1 = u1.getTime();
