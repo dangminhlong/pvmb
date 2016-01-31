@@ -102,10 +102,12 @@ define(["app-config"], function (app) {
                         files: files
                     }
                 }).then(function (response) {
+                        $scope.sendStatus = 'Đang gửi tin nhắn...Xin vui lòng chờ'
                         $timeout(function () {
                             response.data.forEach(function(value, idx, arData){
                                 $scope.send_sms(value.sodienthoai, value.noidung);
                             });
+                            $scope.sendStatus = 'Kết thúc gửi tin nhắn';
                         });
                     }, function (response) {
                         if (response.status > 0) {
