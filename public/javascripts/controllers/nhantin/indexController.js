@@ -1,5 +1,5 @@
 define(["app-config"], function (app) {
-    app.register.controller("nhantinController", ["$scope", "$rootScope", "$location", "$http", function ($scope, $rootScope, $location, $http) {
+    app.register.controller("nhantinController", ["$scope", "$rootScope", "$location", "$http","$uibModal", function ($scope, $rootScope, $location, $http,$uibModal) {
         $scope.initController = function () {
             $rootScope.title = 'QUẢN LÝ NHẮN TIN';
             $scope.url = localStorage.getItem('smsURL');
@@ -26,6 +26,21 @@ define(["app-config"], function (app) {
                 $scope.dsSMS = response.data;
             });
         };
+
+        $scope.send_sms_excel = function () {
+            $rootScope.smsUrl = $scope.url;
+            var modalInstance = $uibModal.open({
+                templateUrl: 'uploadExcelTemplate.html',
+                controller: 'uploadExcelController',
+                size: 'lg'
+            });
+
+            modalInstance.result.then(function (data) {
+
+            }, function () {
+                console.log('Modal dismissed at: ' + new Date());
+            });
+        }
         
         $scope.nhantin = function () {
             localStorage.setItem('smsURL', $scope.url);     
@@ -74,5 +89,55 @@ define(["app-config"], function (app) {
                 $scope.dsSMS = msg.data;
             });
         }
+    }]);
+
+    app.register.controller("uploadExcelController", ["$scope", "$rootScope", "$routeParams", "$http", "Upload", "$uibModalInstance", "$timeout", function ($scope, $rootScope, $routeParams, $http, Upload, $uibModalInstance, $timeout) {
+        $scope.smsUrl = $rootScope.smsUrl + '/services/api/messaging/';
+        $scope.uploadFiles = function (files) {
+            $scope.files = files;
+            if (files && files.length) {
+                Upload.upload({
+                    url: '/sms/upload',
+                    data: {
+                        files: files
+                    }
+                }).then(function (response) {
+                        $timeout(function () {
+                            response.data.forEach(function(value, idx, arData){
+                                $scope.send_sms(value.sodienthoai, value.noidung);
+                            });
+                        });
+                    }, function (response) {
+                        if (response.status > 0) {
+                            $scope.errorMsg = response.status + ': ' + response.data;
+                        }
+                    }, function (evt) {
+                        $scope.progress =
+                            Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+                    });
+            }
+        }
+
+        $scope.send_sms = function(sodienthoai, noidung){
+            var data = new FormData();
+            data.append("To", sodienthoai);
+            data.append("Message", noidung);
+            var x_requested_with = $http.defaults.headers.common['X-Requested-With'];
+            delete $http.defaults.headers.common['X-Requested-With'];
+            $http.post($scope.smsUrl, data, {
+                headers: { 'Content-Type': undefined },
+                transformRequest: angular.identity
+            }).success(function (data, status, headers, config) {
+                    console.log(data.message.to);
+                }).error(function (data, status, headers, config) {
+                    console.log('error');
+                });
+            $http.defaults.headers.common['X-Requested-With'] = x_requested_with;
+        }
+
+        $scope.cancel = function () {
+            $uibModalInstance.dismiss('cancel');
+        };
+
     }]);
 });

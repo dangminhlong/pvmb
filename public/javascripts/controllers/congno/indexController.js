@@ -112,10 +112,10 @@ define(["app-config"], function (app) {
                             u1.setHours(0,0,0,0);
                             u2.setHours(0,0,0,0);
                         }
-                        if (v1.hangmaybay && v1.hangmaybay.viettat == 'VN'){
+                        if (v1.hang && v1.hang.viettat == 'VN'){
                             u1.setHours(0,0,0,0);
                         }
-                        if (v2.hangmaybay && v2.hangmaybay.viettat == 'VN'){
+                        if (v2.hang && v2.hang.viettat == 'VN'){
                             u2.setHours(0,0,0,0);
                         }
                         var t1 = u1.getTime();

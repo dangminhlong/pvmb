@@ -108,10 +108,10 @@ CongNo.prototype.importExcel = function (data, callback) {
 
 CongNo.prototype.findAll = function (timtheo, tu, den, tinhtrangve, tinhtrangno, hoanve, mave, id_ctv, tenkhach, ghichu, callback) {
     config.opendb().then(function (db) {
-        var _tu = new Date(tu);
-        var _den = new Date(den);
-        var tungay = new Date(_tu.getFullYear(), _tu.getMonth(), _tu.getDate());
-        var denngay = new Date(_den.getFullYear(), _den.getMonth(), _den.getDate(), 23, 59, 59);
+        var tungay = new Date(tu);
+        var denngay = new Date(den);
+        tungay.setHours(0,0,0,0);
+        denngay.setHours(23,59,59,999);
         var filter = {};
         if (timtheo == 1){
             filter = extend(filter, {ngaydatve: { $gte: tungay, $lte: denngay }});
@@ -120,8 +120,11 @@ CongNo.prototype.findAll = function (timtheo, tu, den, tinhtrangve, tinhtrangno,
         {
             filter = extend(filter, {ngayxuatve: { $gte: tungay, $lte: denngay }});
         }
-        else {
+        else if (timtheo == 3) {
             filter = extend(filter, {ngaythanhtoan: { $gte: tungay, $lte: denngay }});
+        }
+        else {
+            filter = extend(filter, {ngaybay: { $gte: tungay, $lte: denngay }});
         }
         
         if (tinhtrangve && tinhtrangve.length) {
@@ -134,14 +137,18 @@ CongNo.prototype.findAll = function (timtheo, tu, den, tinhtrangve, tinhtrangno,
             filter = extend(filter, { tinhtrangno: tinhtrangno });
         if (mave && mave.length)
             filter = extend(filter, { mave: mave });
-        if (tenkhach && tenkhach.length)
-            filter = extend(filter, { khachhang: tenkhach });
-        if (ghichu && ghichu.length)
-            filter = extend(filter, { ghichu: ghichu });
+        if (tenkhach && tenkhach.length){
+            var tkPattern = new RegExp(tenkhach, "g");
+            filter = extend(filter, { khachhang: {$regex: tkPattern} });
+        }
+        if (ghichu && ghichu.length){
+            var gcPattern = new RegExp(ghichu, "g");
+            filter = extend(filter, { ghichu: {$regex: gcPattern} });
+        }
         if (hoanve && hoanve.length)
             filter = extend(filter, { hoanve: hoanve });
         if (id_ctv)
-            filter = extend(filter, { "ctv._id": id_ctv });
+            filter = extend(filter, { "ctv._id": ObjectID(id_ctv) });
 
         deferred(layDsCongNo(db, filter), layTongCongNo(db, filter))(function (values) {
             var dsCongNo = values[0];
@@ -184,7 +191,7 @@ CongNo.prototype.addNew = function (doc, callback) {
             doc.ngayhoanve = ngayhoanve;
         }
         if (doc.ctv && doc.ctv._id){
-            var ctv_id = ObjectID(doc.ctv._id);
+            var ctv_id = new ObjectID(doc.ctv._id);
             delete doc.ctv["_id"];
             doc.ctv._id = ctv_id;
         }
@@ -236,7 +243,7 @@ CongNo.prototype.update = function (doc, callback) {
             doc.ngayhoanve = ngayhoanve;
         }
         if (doc.ctv && doc.ctv._id){
-            var ctv_id = ObjectID(doc.ctv._id);
+            var ctv_id = new ObjectID(doc.ctv._id);
             delete doc.ctv["_id"];
             doc.ctv._id = ctv_id;
         }
@@ -281,13 +288,13 @@ CongNo.prototype.huy = function (doc, callback) {
 
 CongNo.prototype.thu = function(ngay, callback){
     config.opendb().then(function(db){
-        var _tu = new Date(ngay);
-        var _den = new Date(ngay);
-        var tungay = new Date(_tu.getFullYear(), _tu.getMonth(), _tu.getDate());
-        var denngay = new Date(_den.getFullYear(), _den.getMonth(), _den.getDate(), 23, 59, 59);
+        var tungay = new Date(ngay);
+        var denngay = new Date(ngay);
+        tungay.setHours(0,0,0,0);
+        denngay.setHours(23,59,59,999);
         var filter = {
             "ngaythanhtoan":{$gte:tungay, $lte:denngay},
-            "tinhtrangno":"ĐÃ THANH TOÁN"
+            "tinhtrangve":{$ne:"HỦY"}
         };
         db.collection('congno').aggregate([
         { $match: filter },

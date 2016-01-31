@@ -1,4 +1,28 @@
 <div ng-controller="nhantinController" ng-init="initController()">
+    <script type="text/ng-template" id="uploadExcelTemplate.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Nhắn tin theo file excel!</h3>
+        </div>
+        <div class="modal-body">
+            <form enctype="multipart/form-data" name="form">
+
+                <button ngf-select="uploadFiles($files)" multiple>Chọn file</button>
+                <br>
+                <br>Dach sách file
+                <ul>
+                    <li ng-repeat="f in files" style="font:smaller">
+                        {{f.name}}
+                    </li>
+                </ul>
+                <span class="progress" ng-show="progress >= 0">
+                    <div style="width:{{progress}}%" ng-bind="progress + '%'"></div>
+                </span> {{errorMsg}}
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-warning" type="button" ng-click="cancel()">Đóng</button>
+        </div>
+    </script>
     <script type="text/ng-template" id="thanhvienTemplate.html">
         <div class="row" style="padding:5px; width:600px; cursor:pointer">
             <div class="col-md-5" style="color:#000fff">{{match.model.ten}}</div>
@@ -33,7 +57,8 @@
                             </div>
                         </div>
                         <input class="btn btn-default" type="button" value="Làm mới" ng-click="reset()" />
-                        <input class="btn btn-primary" type="button" value="Gửi tin nhắn" ng-click="nhantin()" />                     
+                        <input class="btn btn-primary" type="button" value="Gửi tin nhắn" ng-click="nhantin()" />
+                        <input class="btn btn-primary" type="button" value="Gửi theo file excel" ng-click="send_sms_excel()" />
                     </form>
                 </div>
             </div>
