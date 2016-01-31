@@ -1,5 +1,6 @@
 define(["app-config"], function (app) {
-    app.register.controller("congnoController", ["$scope", "$rootScope", "$routeParams", "$http", "$uibModal", function ($scope, $rootScope, $routeParams, $http, $uibModal) {
+    app.register.controller("congnoController", ["$scope", "$rootScope", "$routeParams", "$http", "$uibModal","$interval",
+        function ($scope, $rootScope, $routeParams, $http, $uibModal, $interval) {
         $scope.initController = function () {
             $rootScope.title = 'QUẢN LÝ CÔNG NỢ';
             $scope.dsCongNo = [];
@@ -14,6 +15,9 @@ define(["app-config"], function (app) {
             $scope.layDsThanhVien();
             $scope.xemCongNo();
             $scope.layDsHangMayBay();
+            $interval(function(){
+                $scope.xemCongNo();
+            }, 1000*60*10)
         }
         $scope.chon_tungay = function () {
             $scope.popup_tungay.opened = true;

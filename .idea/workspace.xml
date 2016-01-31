@@ -2,15 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd3b1f32-bd1f-4f74-a99a-374b1887d383" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/templates/nhantin/index.html" afterPath="$PROJECT_DIR$/public/templates/nhantin/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/nhantin/indexController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/nhantin/indexController.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" afterPath="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pvmb.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454217625100" ignored="false" />
+    <file path="/Dummy.txt" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454218989003" ignored="false" />
     <file path="/style.css" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453394443504" ignored="false" />
-    <file path="/indexController.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454218923460" ignored="false" />
+    <file path="/indexController.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454223854971" ignored="false" />
     <file path="/index.html" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454218181128" ignored="false" />
     <file path="/congno.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1454080529097" ignored="false" />
     <file path="/app.js" changelist="dd3b1f32-bd1f-4f74-a99a-374b1887d383" time="1453547115536" ignored="false" />
@@ -43,19 +42,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexController.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="indexController.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="431" column="64" selection-start="18341" selection-end="18341" vertical-scroll-proportion="0.0">
+            <state line="18" column="35" selection-start="872" selection-end="872" vertical-scroll-proportion="0.8526012">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="indexController.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="indexController.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/nhantin/indexController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="109" column="70" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.75722545">
+            <state line="109" column="70" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -101,9 +100,9 @@
         <option value="$PROJECT_DIR$/routes/sms.js" />
         <option value="$PROJECT_DIR$/public/templates/congno/index.html" />
         <option value="$PROJECT_DIR$/controllers/congno.js" />
-        <option value="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" />
         <option value="$PROJECT_DIR$/public/templates/nhantin/index.html" />
         <option value="$PROJECT_DIR$/public/javascripts/controllers/nhantin/indexController.js" />
+        <option value="$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js" />
       </list>
     </option>
   </component>
@@ -596,7 +595,11 @@
       <created>1454217676586</created>
       <updated>1454217676586</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="sua">
+      <created>1454218995754</created>
+      <updated>1454218995754</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -775,13 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="431" column="64" selection-start="18341" selection-end="18341" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/templates/nhantin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="46" selection-start="893" selection-end="893" vertical-scroll-proportion="-4.769231">
@@ -791,7 +787,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/nhantin/indexController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="109" column="70" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.75722545">
+        <state line="109" column="70" selection-start="4772" selection-end="4772" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/javascripts/controllers/congno/indexController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="35" selection-start="872" selection-end="872" vertical-scroll-proportion="0.8526012">
           <folding />
         </state>
       </provider>
