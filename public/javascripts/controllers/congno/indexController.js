@@ -17,7 +17,7 @@ define(["app-config"], function (app) {
             $scope.layDsHangMayBay();
             $interval(function(){
                 $scope.xemCongNo();
-            }, 1000*60*10)
+            }, 1000*60)
         }
         $scope.chon_tungay = function () {
             $scope.popup_tungay.opened = true;
@@ -333,7 +333,7 @@ define(["app-config"], function (app) {
         }
 
         $scope.thayDoiGia = function () {
-            if ($scope.congno.tinhtrangve == 'ĐÃ XUẤT') {
+            if ($scope.congno.tinhtrangve !== 'HOÀN VÉ') {
                 $scope.congno.phaithu = $scope.congno.giaban - (!$scope.congno.ckctv ? 0 : $scope.congno.ckctv);
                 $scope.congno.loinhuan = $scope.congno.phaithu - $scope.congno.giave - $scope.congno.ckdl;                
             }
@@ -342,7 +342,7 @@ define(["app-config"], function (app) {
         $scope.chonHanhTrinh = function(){
             $scope.congno.ckctv = !$scope.congno.ctv ? 0 : $scope.congno.hanhtrinh.heso*$scope.congno.ctv.chietkhau;
             $scope.congno.ckdl = $scope.congno.hanhtrinh.heso*5000;
-            if ($scope.congno.tinhtrangve == 'ĐÃ XUẤT'){
+            if ($scope.congno.tinhtrangve !== 'HOÀN VÉ'){
                 $scope.congno.phaithu = $scope.congno.giaban - $scope.congno.ckctv;
                 $scope.congno.loinhuan = $scope.congno.phaithu - $scope.congno.giave - $scope.congno.ckdl;
             }
@@ -355,18 +355,17 @@ define(["app-config"], function (app) {
         }
         
         $scope.chontinhtrang = function(){
-            if ($scope.congno.tinhtrangve == 'ĐÃ XUẤT') {
-                $scope.congno.phaithu = $scope.congno.giaban - (!$scope.congno.ckctv ? 0 : $scope.congno.ckctv);
-                $scope.congno.loinhuan = $scope.congno.phaithu - $scope.congno.giave - $scope.congno.ckdl;
-                $scope.congno.tinhtrangno = 'NỢ';
-            } else if ($scope.congno.tinhtrangve == 'HOÀN VÉ') {
+            if ($scope.congno.tinhtrangve == 'HOÀN VÉ') {
                 $scope.congno.phaithu = $scope.congno.giave;
-                $scope.congno.loinhuan = - $scope.congno.ckdl;
+                $scope.congno.loinhuan = - $scope.congno.hanhtrinh.heso*5000;
                 $scope.congno.hoanve = 'CHƯA';
                 $scope.congno.tinhtrangno = 'NỢ';
                 delete $scope.congno["ngaythanhtoan"];
             }
-            
+            else if ($scope.congno.tinhtrangve == 'ĐÃ XUẤT'){
+                $scope.congno.tinhtrangno = 'NỢ';
+            }
+
         }
 
         $scope.chonthanhtoan = function(){
